@@ -62,13 +62,21 @@ class JobDetailsProvider extends ChangeNotifier {
   }
 
   void filterFavItems(List<String> id, bool select) {
-    if (id.isEmpty || id == [] || !select) {
+    if ((id.isEmpty || id == []) && !select) {
       filterJobDetails = jobDetails;
       notifyListeners();
-    } else {
-      filterJobDetails =
-          jobDetails?.where((val) => id.contains(val.id)).toList();
+    } else if (id.isEmpty && select) {
+      filterJobDetails = [];
       notifyListeners();
+    } else {
+      if (!select || id.isEmpty || id == []) {
+        filterJobDetails = jobDetails;
+        notifyListeners();
+      } else {
+        filterJobDetails =
+            jobDetails?.where((val) => id.contains(val.id)).toList();
+        notifyListeners();
+      }
     }
   }
 }

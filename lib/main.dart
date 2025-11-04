@@ -19,14 +19,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.backgroundColor,
-        appBarTheme: AppBarTheme(color: AppColors.backgroundColor),
+        scaffoldBackgroundColor: AppColors().backgroundColor(context),
+        appBarTheme: AppBarTheme(color: AppColors().backgroundColor(context)),
       ),
       home: const JobListScreen(),
     );

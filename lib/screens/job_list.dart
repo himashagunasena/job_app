@@ -30,7 +30,9 @@ class _JobListScreenState extends State<JobListScreen> {
   }
 
   Color cardColorsText(int index) {
-    return index % 2 == 0 ? AppColors.white : AppColors.titleColors;
+    return index % 2 == 0
+        ? AppColors().cardLightColor(context)
+        : AppColors().titleColors(context);
   }
 
   @override
@@ -54,7 +56,7 @@ class _JobListScreenState extends State<JobListScreen> {
                     fontSize: 42,
                     fontWeight: FontWeight.w800,
                     height: 1.2,
-                    color: AppColors.titleColors),
+                    color: AppColors().titleColors(context)),
               ),
               SizedBox(height: 16),
               Row(
@@ -63,11 +65,11 @@ class _JobListScreenState extends State<JobListScreen> {
                     flex: 5,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.white,
+                        color: AppColors().white(context),
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.shadowColors,
+                            color: AppColors().shadowColors(context),
                             blurRadius: 8,
                             offset: const Offset(2, 4),
                           ),
@@ -76,8 +78,12 @@ class _JobListScreenState extends State<JobListScreen> {
                       child: TextField(
                         controller: searchController,
                         focusNode: searchFocus,
+                        style:
+                            TextStyle(color: AppColors().primaryColor(context)),
                         decoration: InputDecoration(
                             hintText: "Search your dream jobs",
+                            hintStyle: TextStyle(
+                                color: AppColors().primaryColor(context)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none)),
@@ -106,12 +112,12 @@ class _JobListScreenState extends State<JobListScreen> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                             color: isSelectedFav
-                                ? AppColors.primaryColor
-                                : AppColors.white),
+                                ? AppColors().primaryColor(context)
+                                : AppColors().white(context)),
                         child: Icon(Icons.bookmark,
                             color: isSelectedFav
-                                ? AppColors.white
-                                : AppColors.primaryColor),
+                                ? AppColors().white(context)
+                                : AppColors().primaryColor(context)),
                       ),
                     ),
                   )
@@ -124,7 +130,7 @@ class _JobListScreenState extends State<JobListScreen> {
                           padding: EdgeInsets.only(
                               top: MediaQuery.of(context).size.height / 3),
                           child: CircularProgressIndicator(
-                            color: AppColors.primaryColor,
+                            color: AppColors().primaryColor(context),
                           )),
                     )
                   : provider.getFilterJobDetails == null ||
@@ -135,7 +141,7 @@ class _JobListScreenState extends State<JobListScreen> {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w300,
-                            color: AppColors.titleColors,
+                            color: AppColors().titleColors(context),
                           ),
                         ))
                       : Expanded(
@@ -173,10 +179,12 @@ class _JobListScreenState extends State<JobListScreen> {
       child: Container(
         padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
-            color: index % 2 == 0 ? AppColors.primaryColor : AppColors.white,
+            color: index % 2 == 0
+                ? AppColors().cardColor(context)
+                : AppColors().white(context),
             boxShadow: [
               BoxShadow(
-                color: AppColors.shadowColors,
+                color: AppColors().shadowColors(context),
                 blurRadius: 8,
                 offset: const Offset(2, 4),
               ),
@@ -204,8 +212,10 @@ class _JobListScreenState extends State<JobListScreen> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
                         color: index % 2 == 0
-                            ? AppColors.white.withOpacity(0.2)
-                            : AppColors.titleColors.withOpacity(0.2)),
+                            ? AppColors().white(context).withOpacity(0.2)
+                            : AppColors()
+                                .titleColors(context)
+                                .withOpacity(0.2)),
                     child: Text(
                       jobDetails.jobType,
                       style: TextStyle(
