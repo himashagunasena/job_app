@@ -91,26 +91,28 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             )),
                       ),
                       SizedBox(width: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.jobDetails?.companyName ?? "--",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors().titleColors(context),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.jobDetails?.companyName ?? "--",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors().titleColors(context),
+                              ),
                             ),
-                          ),
-                          Text(
-                            "${widget.jobDetails!.city} , ${widget.jobDetails!.country}",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400,
-                              color: AppColors().subTitleColor(context),
+                            Text(
+                              "${widget.jobDetails!.city} , ${widget.jobDetails!.country}",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors().subTitleColor(context),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),

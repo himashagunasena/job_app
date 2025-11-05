@@ -88,6 +88,7 @@ class _JobListScreenState extends State<JobListScreen> {
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                                 borderSide: BorderSide.none)),
+                        autofocus: false,
                         onChanged: (value) {
                           provider.search(
                               value, favJobProvider.favJobIds, isSelectedFav);
@@ -233,27 +234,29 @@ class _JobListScreenState extends State<JobListScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        jobDetails.companyName,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: cardColorsText(index),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          jobDetails.companyName,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: cardColorsText(index),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        "${jobDetails.city} , ${jobDetails.country}",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w300,
-                          color: cardColorsText(index),
+                        SizedBox(height: 4),
+                        Text(
+                          "${jobDetails.city} , ${jobDetails.country}",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w300,
+                            color: cardColorsText(index),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
