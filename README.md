@@ -41,7 +41,7 @@ Used MVVM architecture with provider for easily manage the presentation and logi
    - `storage` - Contains sharedpreference classes
 
 ## Screenshots
-| Dashboard | Faviorite Jobs | Search | Job Details view |
-| ----------------|---------------|---------------|----------------|
-| ![Dashboard](./assets/images/dashboard.png) | ![Faviorite jobs](./assets/images/fav_jobs.png) | ![Search jobs](./assets/images/search.png) | ![Job detail view](./assets/images/job_detail.png) |
-| ![Dark Dashboard](./assets/images/dark_dashboard.png) | ![Dark faviorite jobs](./assets/images/dark_fav_jobs.png) | ![Dark search jobs](./assets/images/dark_search.png) | ![Dark Job detail view](./assets/images/dark_job_detail.png) |
+| Dashboard | Faviorite Jobs Filter | Search | Faviorite Jobs Screen |  Job Details view |
+| ----------------|---------------|---------------|----------------|----------------|
+| ![Dashboard](./assets/images/dashboard.png) | ![Faviorite jobs filter](./assets/images/fav_jobs.png) | ![Search jobs](./assets/images/search.png) | ![Fav job screen](./assets/images/fav_job_screen.png) | ![Job detail view](./assets/images/job_detail.png) |
+| ![Dark Dashboard](./assets/images/dark_dashboard.png) | ![Dark faviorite jobs filter](./assets/images/dark_fav_jobs.png) | ![Dark search jobs](./assets/images/dark_search.png) | ![Dark fav job screen](./assets/images/dark_fav_job_screen.png) | ![Dark Job detail view](./assets/images/dark_job_detail.png) |
