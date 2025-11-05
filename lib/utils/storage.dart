@@ -15,9 +15,4 @@ class CustomStorage {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.remove(key);
   }
-
-  deleteStorage() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.clear();
-  }
 }

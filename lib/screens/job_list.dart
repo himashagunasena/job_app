@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:job_app/provider/fav_job_provider.dart';
 import 'package:job_app/provider/job_details_provider.dart';
 import 'package:job_app/screens/job_details_screen.dart';
@@ -52,7 +53,7 @@ class _JobListScreenState extends State<JobListScreen> {
               SizedBox(height: 24),
               Text(
                 "Find Your\nDream Job",
-                style: TextStyle(
+                style: GoogleFonts.bungee(
                     fontSize: 42,
                     fontWeight: FontWeight.w800,
                     height: 1.2,

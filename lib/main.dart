@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:job_app/provider/fav_job_provider.dart';
 import 'package:job_app/provider/job_details_provider.dart';
 import 'package:job_app/screens/job_list.dart';
@@ -26,6 +27,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       themeMode: ThemeMode.system,
       theme: ThemeData(
+        textTheme: GoogleFonts.robotoTextTheme(
+          Theme.of(context).textTheme,
+        ),
         scaffoldBackgroundColor: AppColors().backgroundColor(context),
         appBarTheme: AppBarTheme(color: AppColors().backgroundColor(context)),
       ),
