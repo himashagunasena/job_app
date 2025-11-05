@@ -6,6 +6,7 @@ This app is created with flutter. Used https://mockapi.io/ for generating mock A
 * Scrollable job list
 * Add to bookmark (faviorite)
 * Check all the details of job
+* Faviorite job list screen
 * Filter bookmark (faviorite) jobs
 * Dark and light mode change with system mode
   
