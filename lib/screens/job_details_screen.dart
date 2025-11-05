@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_app/models/job_details_model.dart';
+import 'package:job_app/screens/widgets/common_button.dart';
 import 'package:job_app/utils/app_colors.dart';
 import 'package:provider/provider.dart';
 
@@ -182,21 +183,10 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                       ),
                     ),
                     SizedBox(width: 8),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        elevation: 0,
-                        backgroundColor: AppColors().primaryColor(context),
-                        fixedSize:
-                            Size(MediaQuery.of(context).size.width - 100, 52),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      child: Text(
-                        "Apply",
-                        style: TextStyle(color: AppColors().white(context)),
-                      ),
+                    CommonButton(
+                      size: Size(MediaQuery.of(context).size.width - 100, 52),
+                      title: "Apply",
+                      onclick: () {},
                     ),
                   ],
                 ),

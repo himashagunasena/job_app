@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:job_app/provider/fav_job_provider.dart';
 import 'package:job_app/provider/job_details_provider.dart';
-import 'package:job_app/screens/job_details_screen.dart';
+import 'package:job_app/screens/faviorite_job_screen.dart';
+import 'package:job_app/screens/widgets/common_button.dart';
+import 'package:job_app/screens/widgets/job_card.dart';
+import 'package:job_app/screens/widgets/search.dart';
 import 'package:job_app/utils/app_colors.dart';
 import 'package:provider/provider.dart';
-
-import '../models/job_details_model.dart';
 
 class JobListScreen extends StatefulWidget {
   const JobListScreen({super.key});
@@ -28,6 +29,12 @@ class _JobListScreenState extends State<JobListScreen> {
       provider.fetchData();
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchController.clear();
+    super.dispose();
   }
 
   Color cardColorsText(int index) {
@@ -65,36 +72,25 @@ class _JobListScreenState extends State<JobListScreen> {
                   Expanded(
                     flex: 5,
                     child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors().white(context),
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors().shadowColors(context),
-                            blurRadius: 8,
-                            offset: const Offset(2, 4),
-                          ),
-                        ],
-                      ),
-                      child: TextField(
-                        controller: searchController,
-                        focusNode: searchFocus,
-                        style:
-                            TextStyle(color: AppColors().primaryColor(context)),
-                        decoration: InputDecoration(
-                            hintText: "Search your dream jobs",
-                            hintStyle: TextStyle(
-                                color: AppColors().primaryColor(context)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none)),
-                        autofocus: false,
-                        onChanged: (value) {
-                          provider.search(
-                              value, favJobProvider.favJobIds, isSelectedFav);
-                        },
-                      ),
-                    ),
+                        decoration: BoxDecoration(
+                          color: AppColors().white(context),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors().shadowColors(context),
+                              blurRadius: 8,
+                              offset: const Offset(2, 4),
+                            ),
+                          ],
+                        ),
+                        child: CommonSearchBar(
+                          textEditingController: searchController,
+                          focusNode: searchFocus,
+                          onchange: (value) {
+                            provider.search(
+                                value, favJobProvider.favJobIds, isSelectedFav);
+                          },
+                        )),
                   ),
                   SizedBox(width: 8),
                   Expanded(
@@ -126,6 +122,17 @@ class _JobListScreenState extends State<JobListScreen> {
                 ],
               ),
               SizedBox(height: 16),
+              CommonButton(
+                  size: Size(MediaQuery.of(context).size.width, 52),
+                  title: "Go to faviorite Jobs",
+                  onclick: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FavioriteJobScreen()),
+                    );
+                  }),
+              SizedBox(height: 16),
               provider.getIsLoading ?? false
                   ? Center(
                       child: Container(
@@ -153,123 +160,13 @@ class _JobListScreenState extends State<JobListScreen> {
                               itemBuilder: (context, index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(bottom: 16),
-                                  child: jobCard(
-                                      provider.getFilterJobDetails![index],
-                                      index),
+                                  child: JobCard(
+                                      jobDetails:
+                                          provider.getFilterJobDetails![index],
+                                      index: index),
                                 );
                               }),
                         ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget jobCard(JobDetailsModel jobDetails, int index) {
-    var favJobProvider = Provider.of<FavJobProvider>(context, listen: true);
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => JobDetailsScreen(
-                    jobDetails: jobDetails,
-                  )),
-        );
-      },
-      child: Container(
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-            color: index % 2 == 0
-                ? AppColors().cardColor(context)
-                : AppColors().white(context),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors().shadowColors(context),
-                blurRadius: 8,
-                offset: const Offset(2, 4),
-              ),
-            ],
-            borderRadius: BorderRadius.circular(20)),
-        child: SizedBox(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    jobDetails.jobTitle,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: cardColorsText(index),
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: index % 2 == 0
-                            ? AppColors().white(context).withOpacity(0.2)
-                            : AppColors()
-                                .titleColors(context)
-                                .withOpacity(0.2)),
-                    child: Text(
-                      jobDetails.jobType,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: cardColorsText(index),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 48),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          jobDetails.companyName,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: cardColorsText(index),
-                          ),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          "${jobDetails.city} , ${jobDetails.country}",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300,
-                            color: cardColorsText(index),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      favJobProvider.setFavJob(jobDetails.id);
-                    },
-                    child: Icon(
-                        favJobProvider.isFavJob(jobDetails.id)
-                            ? Icons.bookmark
-                            : Icons.bookmark_border,
-                        color: cardColorsText(index)),
-                  )
-                ],
-              )
             ],
           ),
         ),
